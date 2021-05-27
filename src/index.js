@@ -8,3 +8,34 @@ const galleryRef = document.querySelector('.js-menu')
 
 const markUp = itemsMenu(menuGalerry)
 galleryRef.insertAdjacentHTML('beforeend', markUp)
+
+
+const Theme = {
+    LIGHT: 'light-theme',
+    DARK: 'dark-theme',
+  };
+
+const currentTheme = localStorage.getItem('theme');
+const themeToggle = document.querySelector('#theme-switch-toggle');
+
+themeToggle.addEventListener('change', onToggleChange);
+
+if (currentTheme) {
+  document.body.classList.add(currentTheme);
+}
+
+if (currentTheme === Theme.DARK) {
+  themeToggle.checked = true;
+}
+
+function onToggleChange() {
+  if (themeToggle.checked) {
+    document.body.classList.add(Theme.DARK);
+    document.body.classList.remove(Theme.LIGHT);
+    localStorage.setItem('theme', Theme.DARK);
+  } else {
+    document.body.classList.add(Theme.LIGHT);
+    document.body.classList.remove(Theme.DARK);
+    localStorage.setItem('theme', Theme.LIGHT);
+  }
+}
